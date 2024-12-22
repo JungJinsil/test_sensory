@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sensory Evaluation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        h1 {
+            text-align: center;
+        }
+        .question {
+            margin-bottom: 15px;
+        }
+        .options {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 10px;
+        }
+        label {
+            margin-left: 5px;
+            font-weight: normal;
+        }
+        button {
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Sensory Evaluation</h1>
+        <form id="surveyForm">
+            <div class="question">
+                <label>3가지 시료 중 다른 하나를 찾으세요:</label>
+                <div class="options" id="optionsContainer"></div>
+            </div>
+            <button type="button" onclick="submitEvaluation()">평가완료</button>
+        </form>
+    </div>
+
+    <script>
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function renderOptions() {
+            const optionsContainer = document.getElementById('optionsContainer');
+            const samples = ['456', '123', '486'];
+
+            // Shuffle samples
+            shuffleArray(samples);
+
+            // Render shuffled samples as radio buttons
+            samples.forEach(sample => {
+                const optionDiv = document.createElement('div');
+                optionDiv.innerHTML = `
+                    <input type="radio" id="sample${sample}" name="sample" value="${sample}" required>
+                    <label for="sample${sample}">${sample}</label>
+                `;
+                optionsContainer.appendChild(optionDiv);
+            });
+        }
+
+        function submitEvaluation() {
+            const selectedSample = document.querySelector('input[name="sample"]:checked');
+
+            // Check if a sample is selected
+            if (!selectedSample) {
+                alert("하나의 샘플을 선택해주세요.");
+                return;
+            }
+
+            // Save the selected sample (optional: send to server)
+            const selectedValue = selectedSample.value;
+
+            // Redirect to the result page with selected value
+            window.location.href = `completion.html?sample=${selectedValue}`;
+        }
+
+        // Initialize options on page load
+        window.onload = renderOptions;
+    </script>
+</body>
+</html>
