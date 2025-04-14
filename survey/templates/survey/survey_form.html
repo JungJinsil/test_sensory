@@ -1,0 +1,30 @@
+<!-- survey_form.html 예시 -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>관능평가 설문</title>
+  <!-- Bootstrap CSS (CDN) -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+  />
+</head>
+<body class="container my-5"> <!-- container, 여백 -->
+  <h1 class="mb-4">관능평가 설문</h1>
+  <form method="POST">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label class="form-label">맛 점수 (1~5)</label>
+      <input type="number" name="taste_score" min="1" max="5" class="form-control" />
+    </div>
+    <div class="mb-3">
+      <label class="form-label">향 점수 (1~5)</label>
+      <input type="number" name="flavor_score" min="1" max="5" class="form-control" />
+    </div>
+    <button type="submit" class="btn btn-primary">제출하기</button>
+  </form>
+  <!-- Bootstrap JS (선택) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

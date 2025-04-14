@@ -1,0 +1,113 @@
+<!-- survey/templates/survey/create_dif_test_preview.html -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>이점검사 설문 미리보기</title>
+  <!-- Bootstrap CSS -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+  />
+  <style>
+    body {
+      background-color: #f2f2f2;
+    }
+    .title-logo {
+      font-weight: bold;
+      font-size: 1.4rem;
+      color: #fff;
+    }
+    .main-card {
+      background-color: #ffffff;
+      border: none;
+      border-radius: 5px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .pair-item {
+      font-size: 1rem;
+      padding: 0.4rem 0.6rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- 상단 네비바 -->
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+      <span class="navbar-brand title-logo">SweetOptima</span>
+    </div>
+  </nav>
+
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-sm-8 col-md-6 col-lg-5">
+        <div class="card main-card p-4">
+          <h3 class="mb-4 text-center">이점검사 미리보기</h3>
+
+          <!-- 1) 미리보기 정보 표시 -->
+          <div class="mb-3">
+            <label class="form-label fw-bold">제목</label>
+            <div class="form-control-plaintext">
+              {{ title }}
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label fw-bold">서술형 설명문</label>
+            <div class="form-control-plaintext">
+              {{ description }}
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label fw-bold">Set 수</label>
+            <div class="form-control-plaintext">
+              {{ set_count }} Set
+            </div>
+          </div>
+
+          <hr />
+
+          <!-- 2) 임시 생성된 시료코드 쌍 목록 -->
+          <h6 class="fw-bold">샘플 코드 (임시)</h6>
+          {% if pairs %}
+            <ul class="list-group mb-3">
+              {% for pair in pairs %}
+                <li class="list-group-item pair-item">
+                  {{ forloop.counter }}Set: {{ pair.0 }} / {{ pair.1 }}
+                </li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <p class="text-muted">샘플 코드가 없습니다.</p>
+          {% endif %}
+
+          <p class="text-secondary small">
+            이 화면은 DB에 저장되지 않은 <strong>임시 미리보기</strong>입니다.
+          </p>
+
+          <div class="d-flex gap-2">
+            <!-- (A) 수정하기 버튼: 다시 '이점검사 생성' 페이지로 돌아가기 -->
+            <!-- /survey/create/dif-test/ 로 가정 -->
+            <a href="/survey/create/dif-test/" class="btn btn-outline-secondary flex-fill">
+              수정하기
+            </a>
+
+            <!-- (B) 확인(생성) 버튼: POST -> create_dif_test_confirm -->
+            <form action="{% url 'create_dif_test_confirm' %}" method="post" class="flex-fill">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-dark w-100">
+                확인(생성)
+              </button>
+            </form>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS (선택) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

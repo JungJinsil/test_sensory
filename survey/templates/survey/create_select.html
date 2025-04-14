@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>평가 선택</title>
+  <!-- Bootstrap CSS -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+  />
+  <style>
+    body {
+      background-color: #f2f2f2; /* 전체 배경 */
+    }
+    .title-logo {
+      font-weight: bold;
+      font-size: 1.4rem;
+      color: #fff;
+    }
+    .main-card {
+      background-color: #ffffff;
+      border: none;
+      border-radius: 5px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    /* 정사각형 버튼 스타일 */
+    .square-btn {
+      width: 180px;            /* 고정 너비(정사각형) */
+      height: 180px;           /* 고정 높이(정사각형) */
+      display: flex;           /* 내부 요소들 flex 배치 */
+      flex-direction: column;  /* 세로 방향 정렬 (이미지-텍스트) */
+      align-items: center;     
+      justify-content: center; 
+      font-size: 1.2rem;       /* 글자 크기 크게 */
+      margin: 0 auto 20px;     /* 가운데 정렬 + 아래 여백 */
+    }
+    /* 버튼 내부 이미지 */
+    .square-btn img {
+      width: 64px;
+      height: 64px;
+      margin-bottom: 8px;
+      object-fit: cover; /* 이미지 비율 맞추기 */
+    }
+  </style>
+</head>
+<body>
+  <!-- 네비바(검정) -->
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+      <span class="navbar-brand title-logo">SweetOptima</span>
+    </div>
+  </nav>
+
+  <!-- 메인 컨테이너 -->
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-sm-8 col-md-6 col-lg-5">
+        <div class="card main-card p-4 text-center">
+          <h3 class="mb-4">평가 선택</h3>
+
+          <!-- Bootstrap 그리드 시스템: 한 행(row)에 col-4씩 최대 3개 표시 -->
+          <div class="row">
+            <!-- 이점검사 -->
+            <div class="col-4 mb-4 d-flex">
+              <button
+                class="btn btn-dark square-btn"
+                onclick="location.href='/survey/create/dif-test/'"
+              >
+                <img src="/static/imgs/two_point_test.jpg" alt="이점검사 아이콘">
+                이점검사
+              </button>
+            </div>
+
+            <!-- 삼점검사 (소비자검사 -> 삼점검사로 변경) -->
+            <div class="col-4 mb-4 d-flex">
+              <button
+                class="btn btn-dark square-btn"
+                onclick="location.href='/survey/create/select/삼점검사/'"
+              >
+                <img src="/static/imgs/three_point_test.jpg" alt="삼점검사 아이콘">
+                삼점검사
+              </button>
+            </div>
+
+            <!-- 묘사분석 -->
+            <div class="col-4 mb-4 d-flex">
+              <button
+                class="btn btn-dark square-btn"
+                onclick="location.href='/survey/create/select/묘사분석/'"
+              >
+                <img src="/static/imgs/two_point_test.jpg" alt="묘사분석 아이콘">
+                묘사분석
+              </button>
+            </div>
+
+            <!-- 추가예정 -->
+            <div class="col-4 mb-4 d-flex">
+              <button
+                class="btn btn-dark square-btn"
+                onclick="alert('추가 예정인 평가입니다!')"
+              >
+                <img src="/static/imgs/update.png" alt="추가예정 아이콘">
+                추가예정
+              </button>
+            </div>
+          </div>
+          <!-- row 끝 -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

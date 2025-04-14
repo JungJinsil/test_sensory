@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>오늘의 평가 진행</title>
+</head>
+<body>
+  <h1>오늘의 평가 진행</h1>
+  <ul>
+    {% for qs in todays %}
+      <li>
+        {{ qs.name }}
+        <!-- /survey/do/<qs.id>/ 로 연결, 실제 설문 응답 페이지로 이동하게 만들자(아래에서 구현) -->
+        <button onclick="location.href='/survey/do/{{ qs.id }}/'">평가하기</button>
+      </li>
+    {% empty %}
+      <li>오늘 진행할 평가가 없습니다.</li>
+    {% endfor %}
+  </ul>
+</body>
+</html>

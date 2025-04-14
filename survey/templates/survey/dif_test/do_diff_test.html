@@ -1,0 +1,159 @@
+<!-- survey/templates/survey/do_diff_test.html -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8"/>
+  <title>{{ question_set.name }} - 이점검사</title>
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+  />
+  <style>
+    /* 제목, 설명문 스타일 */
+    .survey-title {
+      font-size: 1.8rem;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+    .survey-desc {
+      font-size: 1.1rem;
+      color: #666;
+      margin-bottom: 15px;
+    }
+    /* Set 구분 타이틀 */
+    .set-title {
+      font-weight: bold;
+      margin: 20px 0 10px;
+      font-size: 1.2rem;
+    }
+    /* 시료코드 큰 버튼 */
+    .sample-btn {
+      width: 120px;
+      height: 120px;
+      font-size: 1.4rem;
+      margin: 10px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    /* 선택된 버튼 강조 */
+    .sample-btn.selected {
+      background-color: #0069d9 !important; /* Bootstrap primary */
+      border-color: #0062cc;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <!-- 상단 네비게이션 바 -->
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+      <span class="navbar-brand">SweetOptima</span>
+    </div>
+  </nav>
+
+  <div class="container mt-5">
+    <!-- 설문 제목 / 설명문 -->
+    <div class="survey-title">{{ question_set.name }}</div>
+    <div class="survey-desc">{{ description }}</div>
+
+    <form method="POST" id="diffTestForm">
+      {% csrf_token %}
+      
+      <!-- (1) 패널 이름 입력 (필수) -->
+      <div class="mb-3">
+        <label for="panelName" class="form-label">성함을 작성해 주세요.</label>
+        <input
+          type="text"
+          class="form-control"
+          id="panelName"
+          name="panel_name"
+          required
+          placeholder="예) 홍길동"
+        />
+      </div>
+
+      <!-- (2) 시료 선택 영역 -->
+      <!-- sets_data: [{set_no:1, codes:["363","980"]}, {set_no:2, ...}] -->
+      {% for sdata in sets_data %}
+        <div class="set-title">
+          {{ sdata.set_no }}Set - 두 시료 중 더 단 시료를 선택하세요.
+        </div>
+        <div>
+          {% for code in sdata.codes %}
+            <button
+              type="button"
+              class="btn btn-dark sample-btn"
+              data-setno="{{ sdata.set_no }}"
+              data-code="{{ code }}"
+            >
+              {{ code }}
+            </button>
+          {% endfor %}
+        </div>
+        <!-- 사용자 선택값을 숨기는 hidden input (필수) -->
+        <input type="hidden" name="set_{{ sdata.set_no }}" id="set_{{ sdata.set_no }}" />
+      {% endfor %}
+
+      <!-- (3) 기타 의견 (선택) -->
+      <div class="mb-3 mt-4">
+        <label for="etcOpinion" class="form-label">기타 의견을 자유롭게 작성해주세요.</label>
+        <textarea
+          class="form-control"
+          id="etcOpinion"
+          name="etc_opinion"
+          rows="3"
+          placeholder="의견 작성(필수X)"
+        ></textarea>
+      </div>
+
+      <!-- (4) 제출 버튼 -->
+      <div class="mt-4">
+        <button type="submit" class="btn btn-primary">제출</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function(){
+      const btns = document.querySelectorAll('.sample-btn');
+      btns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const setNo = btn.getAttribute('data-setno');
+          const code = btn.getAttribute('data-code');
+          // hidden input에 code 세팅
+          const hiddenInput = document.getElementById('set_' + setNo);
+          hiddenInput.value = code;
+
+          // 같은 setNo 버튼들은 selected 해제
+          const siblings = document.querySelectorAll(`.sample-btn[data-setno='${setNo}']`);
+          siblings.forEach(sib => sib.classList.remove('selected'));
+          
+          // 현재 버튼만 selected 클래스
+          btn.classList.add('selected');
+        });
+      });
+
+      // 폼 제출 시 검사 (필수: 모든 set이 선택되었는지)
+      const form = document.getElementById('diffTestForm');
+      form.addEventListener('submit', (event) => {
+        // (a) panel_name 은 required -> 브라우저 자동 체크
+        // (b) 각 set_# input 확인
+        const hiddenInputs = document.querySelectorAll('input[id^="set_"]');
+        for (let input of hiddenInputs) {
+          if (!input.value) {
+            const setNo = input.id.replace('set_', '');
+            alert(`${setNo}Set 시료를 선택해주세요.`);
+            event.preventDefault();
+            return;
+          }
+        }
+        // 통과 시 제출 진행
+      });
+    });
+  </script>
+</body>
+</html>

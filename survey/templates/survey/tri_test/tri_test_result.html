@@ -1,0 +1,70 @@
+<!-- survey/templates/survey/tri_test_result.html -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>삼점검사 설문 생성 완료</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
+  <style>
+    body { background-color: #f2f2f2; }
+    .title-logo { font-weight: bold; font-size: 1.4rem; color: #fff; }
+    .main-card {
+      background-color: #ffffff;
+      border: none;
+      border-radius: 5px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+      <span class="navbar-brand title-logo">SweetOptima</span>
+    </div>
+  </nav>
+
+  <div class="container mt-4">
+    <div class="row justify-content-center">
+      <div class="col-md-8 col-lg-6">
+        <div class="card main-card p-4">
+          <h3 class="mb-3 text-center">삼점검사 설문 생성 완료</h3>
+
+          <p><strong>제목:</strong> {{ title }}</p>
+          <p><strong>설명문:</strong> {{ description }}</p>
+          <p><strong>Set 수:</strong> {{ set_count }}</p>
+
+          <hr/>
+          <h5>생성된 샘플 코드 (3개씩)</h5>
+          {% if triplets %}
+            <ul class="list-group mb-4">
+              {% for t in triplets %}
+                <li class="list-group-item">
+                  {{ forloop.counter }}Set: {{ t.0 }} / {{ t.1 }} / {{ t.2 }}
+                </li>
+              {% endfor %}
+            </ul>
+          {% else %}
+            <p>샘플 코드가 없습니다.</p>
+          {% endif %}
+
+          <!-- 평가지 확인 링크 등 필요시 -->
+          {% if set_id %}
+            <div class="alert alert-secondary text-center mb-3">
+              <p class="mb-1">평가 진행 페이지 링크 (예시):</p>
+              <code>http://127.0.0.1:8000/survey/tri-do/{{ set_id }}/</code>
+            </div>
+          {% endif %}
+
+          <div class="d-flex justify-content-between">
+            <button class="btn btn-info" onclick="location.href='/survey/list/'">
+              설문목록확인
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

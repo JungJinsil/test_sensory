@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>질문 추가</title>
+</head>
+<body>
+  <h1>질문 추가하기</h1>
+  <p>현재 설문: <b>{{ question_set.name }}</b></p>
+
+  <form method="POST" style="border:1px solid #ccc; padding: 10px;">
+    {% csrf_token %}
+    <p>
+      <label>질문 내용:</label>
+      <input type="text" name="text" placeholder="예: 이 제품의 맛은 어떠셨나요?" style="width:300px;" />
+    </p>
+    <p>
+      <label>질문 타입:</label>
+      <select name="question_type">
+        <option value="scale_5">5점 척도</option>
+        <option value="text">주관식</option>
+        <option value="yes_no">예/아니오</option>
+        <!-- 필요에 따라 추가 -->
+      </select>
+    </p>
+    <button type="submit">추가하기</button>
+  </form>
+</body>
+</html>

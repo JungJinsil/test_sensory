@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>메인 페이지</title>
+  <!-- Bootstrap CSS (CDN) -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+  />
+  <style>
+    /* 전체 배경을 약간 밝은 회색으로 */
+    body {
+      background-color: #f2f2f2;
+    }
+    /* 네비바 로고, 타이틀 */
+    .title-logo {
+      font-weight: bold;
+      font-size: 1.4rem;
+      color: #fff;
+    }
+    /* 메인 카드 스타일 */
+    .main-card {
+      background-color: #ffffff;  /* 흰색 */
+      border: none;
+      border-radius: 5px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1); /* 은은한 그림자 */
+    }
+    /* 중앙 버튼 스타일 (검정톤으로 통일) */
+    .main-btn {
+      width: 100%;
+      margin-bottom: 15px;
+      height: 50px;
+      font-size: 1rem;
+    }
+    .card-title {
+      font-weight: 600;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 상단 네비게이션 바 (어두운 톤) -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <span class="navbar-brand title-logo">SweetOptima</span>
+    </div>
+  </nav>
+
+  <!-- 메인 컨테이너 -->
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <!-- 중앙 컬럼: 화면크기에 따라 너비 유동 -->
+      <div class="col-sm-10 col-md-8 col-lg-6">
+        <div class="card main-card">
+          <div class="card-body p-4">
+            <h2 class="card-title text-center mb-4">메인 페이지</h2>
+            <p class="text-center text-muted mb-4">
+              원하는 작업을 선택해주세요.
+            </p>
+            <!-- 버튼들 (어두운색으로 통일) -->
+            <button
+              class="btn btn-dark main-btn"
+              onclick="location.href='/survey/today/'"
+            >
+              오늘의 평가 진행
+            </button>
+            <button
+              class="btn btn-dark main-btn"
+              onclick="location.href='/survey/list/'"
+            >
+              설문 목록 확인
+            </button>
+            <button
+              class="btn btn-dark main-btn"
+              onclick="location.href='/survey/create/'"
+            >
+              설문 만들기
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS (CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

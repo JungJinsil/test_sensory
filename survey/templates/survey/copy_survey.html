@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>설문 복사</title>
+</head>
+<body>
+  <h1>설문 복사하기</h1>
+  <p>원본 설문: {{ source_set.name }} ({{ source_set.survey_type }})</p>
+  <form method="POST">
+    {% csrf_token %}
+    <label>새 설문 이름:</label>
+    <input type="text" name="new_name" placeholder="ex) {{ source_set.name }}_복사" />
+    <button type="submit">복사</button>
+  </form>
+</body>
+</html>

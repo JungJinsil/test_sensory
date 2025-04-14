@@ -1,0 +1,118 @@
+<!-- survey/templates/survey/create_dif_test.html -->
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>이점검사 설문 만들기</title>
+  <!-- Bootstrap CSS -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+  />
+  <style>
+    body {
+      background-color: #f2f2f2;
+    }
+    .title-logo {
+      font-weight: bold;
+      font-size: 1.4rem;
+      color: #fff;
+    }
+    .main-card {
+      background-color: #ffffff;
+      border: none;
+      border-radius: 5px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+  <!-- 상단 네비바 -->
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+      <span class="navbar-brand title-logo">SweetOptima</span>
+    </div>
+  </nav>
+
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-sm-8 col-md-6 col-lg-5">
+        <div class="card main-card p-4">
+          <h3 class="mb-4 text-center">이점검사 설문 만들기</h3>
+          
+          <!-- 폼 (POST) -->
+          <form method="POST">
+            {% csrf_token %}
+            
+            <!-- 설문 제목 -->
+            <div class="mb-3">
+              <label class="form-label">설문 제목</label>
+              <input
+                type="text"
+                name="title"
+                class="form-control"
+                placeholder="예) 단맛 비교 (이점검사)"
+                required
+              />
+            </div>
+            
+            <!-- 서술형 설명문 -->
+            <div class="mb-3">
+              <label class="form-label">서술형 설명문</label>
+              <textarea
+                name="description"
+                class="form-control"
+                rows="3"
+                placeholder="예) 두 시료를 비교하여 더 단 시료를 선택해 주세요."
+              ></textarea>
+            </div>
+            
+            <!-- Set 수 입력 -->
+            <div class="mb-3">
+              <label class="form-label">Set 수</label>
+              <input
+                type="number"
+                name="set_count"
+                class="form-control"
+                min="1"
+                value="1"
+              />
+              <small class="text-muted">
+                Set당 시료는 2개씩 고정됩니다.  
+                (예: 3Set → 총 6개 시료)
+              </small>
+            </div>
+            
+            <!-- 버튼 2개: '미리보기' + '생성하기' -->
+            <div class="d-flex gap-2 mt-4">
+              <!-- 미리보기 버튼 -->
+              <button
+                type="submit"
+                name="action"
+                value="preview"
+                class="btn btn-outline-dark flex-fill"
+              >
+                미리보기
+              </button>
+
+              <!-- 생성하기 버튼 -->
+              <button
+                type="submit"
+                name="action"
+                value="create"
+                class="btn btn-dark flex-fill"
+              >
+                생성하기
+              </button>
+            </div>
+          </form>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS (선택사항) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

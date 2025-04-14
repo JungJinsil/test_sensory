@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>설문 만들기</title>
+  <!-- Bootstrap CSS (CDN) -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+  />
+  <style>
+    /* 전체 배경을 밝은 회색 */
+    body {
+      background-color: #f2f2f2;
+    }
+    /* 네비게이션 바에 표시할 로고 스타일 */
+    .title-logo {
+      font-weight: bold;
+      font-size: 1.4rem;
+      color: #fff;
+    }
+    /* 카드 스타일 */
+    .main-card {
+      background-color: #ffffff;
+      border: none;
+      border-radius: 5px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+  <!-- 상단 네비바 (검정/다크 톤) -->
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+      <span class="navbar-brand title-logo">SweetOptima</span>
+    </div>
+  </nav>
+
+  <!-- 메인 컨테이너: 중앙 정렬 -->
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-sm-8 col-md-6 col-lg-5">
+        <div class="card main-card p-4">
+          <h3 class="mb-4 text-center">설문 만들기</h3>
+          <button
+            class="btn btn-dark w-100 mb-3"
+            onclick="location.href='/survey/create/from-list/'"
+          >
+            설문목록에서 복사&편집
+          </button>
+          <button
+            class="btn btn-dark w-100"
+            onclick="location.href='/survey/create/select/'"
+          >
+            평가 선택
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS (CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

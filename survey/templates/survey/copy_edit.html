@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>복사&편집</title>
+  <!-- Bootstrap... -->
+</head>
+<body>
+  <!-- 네비바 -->
+  <div class="container mt-5">
+    <h3>복사&편집</h3>
+    <form method="POST">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label class="form-label">새 설문 이름</label>
+        <input
+          type="text"
+          name="new_name"
+          class="form-control"
+          value="{{ source_set.name }}_복사"
+        />
+      </div>
+      <p>기존 유형: {{ source_set.survey_type }}</p>
+      <button class="btn btn-dark" type="submit">복사 생성</button>
+    </form>
+  </div>
+</body>
+</html>
